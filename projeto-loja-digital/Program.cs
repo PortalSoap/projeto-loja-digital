@@ -1,6 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using projeto_loja_digital.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connection));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
